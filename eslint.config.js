@@ -10,6 +10,8 @@ export default antfu({
     json: true,
   },
   rules: {
-    'style/semi': 'off',
+    'style/comma-dangle': 'off',
+    'ts/consistent-type-definitions': 'off',
+    'perfectionist/sort-imports': 'off'
   },
 }).overrideRules(prettier)

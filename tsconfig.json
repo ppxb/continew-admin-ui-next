@@ -23,7 +23,7 @@
       "vite/client",
       "node",
       "unplugin-icons/types/vue",
-      "ant-design-vue/typings/global.d.ts"
+      "naive-ui/volar"
     ],
     "strict": true,
     "strictNullChecks": true,
