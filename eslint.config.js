@@ -12,6 +12,7 @@ export default antfu({
   rules: {
     'style/comma-dangle': 'off',
     'ts/consistent-type-definitions': 'off',
-    'perfectionist/sort-imports': 'off'
+    'perfectionist/sort-imports': 'off',
+    'node/prefer-global/process': 'off'
   },
 }).overrideRules(prettier)
