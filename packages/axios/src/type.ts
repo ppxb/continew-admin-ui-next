@@ -33,4 +33,30 @@ export type CustomAxiosRequestConfig<R extends ResponseType = 'json'> = Omit<Axi
   responseType?: R
 }
 
-// TODO: REQUEST INSTANCE AND DATA DECLARATION
+export interface RequestInstanceCommon<T> {
+  cancelRequest: (requestId: string) => void
+  cancelAllRequest: () => void
+  state: T
+}
+
+export interface RequestInstance<S = Record<string, unknown>> extends RequestInstanceCommon<S> {
+  <T = any, R extends ResponseType = 'json'>(config: CustomAxiosRequestConfig<R>): Promise<MappedType<R, T>>
+}
+
+export type FlatResponseSuccessData<T = any, ResponseData = any> = {
+  data: T
+  error: null
+  response: AxiosResponse<ResponseData>
+}
+
+export type FlatResponseFailData<ResponseData = any> = {
+  data: null
+  error: AxiosError<ResponseData>
+  response: AxiosResponse<ResponseData>
+}
+
+export type FlatResponseData<T = unknown, ResponseData = unknown> = FlatResponseSuccessData<T, ResponseData> | FlatResponseFailData<ResponseData>
+
+export interface FlatRequestInstance<S = Record<string, unknown>, ResponseData = any> extends RequestInstanceCommon<S> {
+  <T = any, R extends ResponseType = 'json'>(config: CustomAxiosRequestConfig<R>): Promise<FlatResponseData<MappedType<R, T>, ResponseData>>
+}
