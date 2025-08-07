@@ -17,6 +17,9 @@ importers:
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
+      defu:
+        specifier: 6.1.4
+        version: 6.1.4
       naive-ui:
         specifier: ^2.42.0
         version: 2.42.0(vue@3.5.18(typescript@5.8.3))

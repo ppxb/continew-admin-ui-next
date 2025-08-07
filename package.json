@@ -12,6 +12,7 @@
     "@ca/color": "workspace:*",
     "@ca/utils": "workspace:*",
     "dayjs": "^1.11.13",
+    "defu": "6.1.4",
     "naive-ui": "^2.42.0",
     "nprogress": "^0.2.0",
     "pinia": "^3.0.3",

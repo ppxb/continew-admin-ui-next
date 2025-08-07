@@ -1,4 +1,4 @@
-declare namespace StorageType{
+declare namespace StorageType {
   interface Session {
     themeColor: string
   }
@@ -6,5 +6,7 @@ declare namespace StorageType{
   interface Local {
     lang: App.I18n.LangType
     token: string
+    themeSettings: App.Theme.ThemeSetting
+    overrideThemeFlag: string
   }
 }
