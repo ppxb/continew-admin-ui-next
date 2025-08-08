@@ -4,7 +4,14 @@ import { computed, effectScope, onScopeDispose, ref, toRefs, watch } from 'vue'
 import { useEventListener, usePreferredColorScheme } from '@vueuse/core'
 
 import { StoreId } from '@/enum'
-import { addThemeVarsToGlobal, createThemeToken, getNaiveTheme, initThemeSettings, toggleAuxiliaryColorModes, toggleCssDarkMode } from './shared'
+import {
+  addThemeVarsToGlobal,
+  createThemeToken,
+  getNaiveTheme,
+  initThemeSettings,
+  toggleAuxiliaryColorModes,
+  toggleCssDarkMode,
+} from './shared'
 import { getPaletteColorByNumber } from '~/packages/color/src'
 import { localStg } from '@/utils/storage'
 
@@ -30,12 +37,14 @@ export const useThemeStore = defineStore(StoreId.Theme, () => {
     const colors: App.Theme.ThemeColor = {
       primary: themeColor,
       ...otherColor,
-      info: isInfoFollowPrimary ? themeColor : otherColor.info
+      info: isInfoFollowPrimary ? themeColor : otherColor.info,
     }
     return colors
   })
 
-  const naiveTheme = computed(() => getNaiveTheme(themeColors.value, settings.value.recommendColor))
+  const naiveTheme = computed(() =>
+    getNaiveTheme(themeColors.value, settings.value.recommendColor)
+  )
 
   const settingsJson = computed(() => JSON.stringify(settings.value))
 
@@ -59,7 +68,9 @@ export const useThemeStore = defineStore(StoreId.Theme, () => {
   function toggleThemeScheme() {
     const themeSchemes: UnionKey.ThemeScheme[] = ['light', 'dark', 'auto']
 
-    const index = themeSchemes.findIndex(item => item === settings.value.themeScheme)
+    const index = themeSchemes.findIndex(
+      item => item === settings.value.themeScheme
+    )
 
     const nextIndex = index === themeSchemes.length - 1 ? 0 : index + 1
 
@@ -113,25 +124,37 @@ export const useThemeStore = defineStore(StoreId.Theme, () => {
   })
 
   scope.run(() => {
-    watch(darkMode, (val) => {
-      toggleCssDarkMode(val)
-      localStg.set('darkMode', val)
-    }, {
-      immediate: true
-    })
+    watch(
+      darkMode,
+      (val) => {
+        toggleCssDarkMode(val)
+        localStg.set('darkMode', val)
+      },
+      {
+        immediate: true,
+      }
+    )
 
-    watch([grayscaleMode, colorWeaknessMode], (val) => {
-      toggleAuxiliaryColorModes(val[0], val[1])
-    }, {
-      immediate: true
-    })
+    watch(
+      [grayscaleMode, colorWeaknessMode],
+      (val) => {
+        toggleAuxiliaryColorModes(val[0], val[1])
+      },
+      {
+        immediate: true,
+      }
+    )
 
-    watch(themeColors, (val) => {
-      setupThemeVarsToGlobal()
-      localStg.set('themeColor', val.primary)
-    }, {
-      immediate: true
-    })
+    watch(
+      themeColors,
+      (val) => {
+        setupThemeVarsToGlobal()
+        localStg.set('themeColor', val.primary)
+      },
+      {
+        immediate: true,
+      }
+    )
   })
 
   onScopeDispose(scope.stop)
@@ -149,6 +172,6 @@ export const useThemeStore = defineStore(StoreId.Theme, () => {
     toggleThemeScheme,
     updateThemeColors,
     setThemeLayout,
-    setLayoutReverseHorizontalMix
+    setLayoutReverseHorizontalMix,
   }
 })
