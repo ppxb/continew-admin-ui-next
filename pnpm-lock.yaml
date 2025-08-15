@@ -110,6 +110,15 @@ importers:
         specifier: 2.9.3
         version: 2.9.3
 
+  packages/hooks:
+    dependencies:
+      '@ca/axios':
+        specifier: workspace:*
+        version: link:../axios
+      '@ca/utils':
+        specifier: workspace:*
+        version: link:../utils
+
   packages/utils:
     dependencies:
       colord:
